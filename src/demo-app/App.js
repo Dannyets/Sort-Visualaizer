@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { AppContainer, MainContent, ConfigurationsTitle } from './App.styles.js';
 
-import { AutoSuggestInput, SortVisualizer, Input } from '../components';
+import { AutoSuggestInput, SortVisualizer, Input, Icon } from '../components';
 import { Button } from '@material-ui/core';
 
 import { sortService } from '../services';
@@ -23,11 +23,12 @@ const SUGGESTIONS = [
  */
 class App extends Component {
   state = {
-    numbers: [5, 100, 12, 30, 55, 1, 78, 22, -5, -30, -50],
+    numbers: generalUtils.getRandomNumbers(20),
     sortingAlgorithem: sortService.bubbleSort,
     isSorting: false,
     value: null,
-    delay: null
+    delay: null,
+    numberOfElements: null
   };
 
   onNumberPositionChange = async (upatedNumbers) => {
@@ -39,11 +40,17 @@ class App extends Component {
   }
 
   handleSort = async () => {
-    const { numbers, sortingAlgorithem } = this.state;
+    const { sortingAlgorithem, numbers } = this.state;
+
+    let currentNumbers = numbers;
+
+    if(!numbers){
+      currentNumbers = this.handleRefreshNumbers();
+    }
 
     this.setState({ isSorting: true });
 
-    await sortingAlgorithem(numbers, this.onNumberPositionChange.bind(this));
+    await sortingAlgorithem(currentNumbers, this.onNumberPositionChange.bind(this));
 
     this.setState({ isSorting: false });
   }
@@ -56,8 +63,22 @@ class App extends Component {
     this.setState({ delay });
   }
 
+  handleNumberOfElementsChanged = (numberOfElements) => {
+    this.setState({ numberOfElements });
+  }
+
+  handleRefreshNumbers = () => {
+    const { numberOfElements } = this.state;
+  
+    let numbers = generalUtils.getRandomNumbers(numberOfElements);
+
+    this.setState({ numbers });
+
+    return numbers;
+  }
+
   render() {
-    const { value, isSorting, numbers, delay } = this.state;
+    const { value, isSorting, numbers, delay, numberOfElements } = this.state;
     const isSortingButtonDisabled = typeof(value) !== 'number' || isSorting;
 
     return (
@@ -75,6 +96,14 @@ class App extends Component {
                   type="number"
                   placeholder="Enter delay miliseconds"
                   onChange={this.handleDelayChanged}/>
+            <Input value={numberOfElements}
+                  type="number"
+                  placeholder="Enter number of elements in array"
+                  onChange={this.handleNumberOfElementsChanged}/>
+            <Icon iconName="Refresh" 
+                  onClick={this.handleRefreshNumbers}
+                  title="Refresh numbers"
+                  tooltipPlacement="right"/>
           </div>
           <SortVisualizer numbers={numbers}/>
           <Button onClick={() => this.handleSort()}
