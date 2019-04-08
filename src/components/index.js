@@ -1,4 +1,5 @@
 export { default as Input } from './input';
+export { default as Navigation } from './navigation';
 export { default as AutoSuggestInput } from './auto-suggest-input';
 export { default as ThemeProvider } from './theme-provider';
 export { default as ReduxContainer } from './redux-container';

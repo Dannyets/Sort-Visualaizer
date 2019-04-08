@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const styles = (theme) => ({
     collapse: {
         zIndex: 2000,
-        position: 'absolute',
-        width: '100%'
     }
 });
 

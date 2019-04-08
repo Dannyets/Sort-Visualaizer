@@ -12,12 +12,12 @@ async function bubbleSort(numbers, onChange) {
 
             if(prevNumber > currentNumber){
                 swap(numbers, currentIndex, prevIndex);
+                
+                currentSwapsMade++;
 
                 if(onChange){
                     await onChange(numbers);
                 }
-                
-                currentSwapsMade++;
             }
         }
     }

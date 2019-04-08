@@ -28,8 +28,8 @@ export const NegativeVisualNumberContainer = styled(VisualNumberContainer)`
 `;
 
 const VisualNumber = styled.div`
-    background-color: white;
     width: 33%;
+    background-color: ${props => getColor(props.number)};
 `;
 
 export const PositiveVisualNumber = styled(VisualNumber)`
@@ -37,5 +37,22 @@ export const PositiveVisualNumber = styled(VisualNumber)`
 `;
 
 export const NegativeVisualNumber = styled(VisualNumber)`
-    height: ${props => props.number < 0 ? `${-props.number}%` : '0'};
+    height: ${props => props.number < 0 ? `${Math.abs(props.number)}%` : '0'};
 `;
+
+export const NumberTitle = styled.div`
+    width: 33%;
+    text-align: center;
+    margin: 5px 0;
+`;
+
+const getColor = (number) => {
+    const red = 18;
+    const green = 54;
+    const blue = 107;
+
+    const factor = 100;
+    const addon = (Math.abs(number) / 100) * factor;
+
+    return `rgb(${red + addon}, ${green + addon}, ${blue + addon})`
+}

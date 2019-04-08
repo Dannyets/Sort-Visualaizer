@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import './App.css';
-import { AppContainer, Header, MainContent } from './App.styles.js';
+import { AppContainer, MainContent } from './App.styles.js';
 
-import Navigation from '../components/navigation';
-import { AutoSuggestInput, ThemeProvider, SortVisualizer } from '../components';
+import { AutoSuggestInput, SortVisualizer } from '../components';
 import { Button } from '@material-ui/core';
 
 import { sortService } from '../services';
 import { general as generalUtils } from '../utils';
 
-const NavigationWithRouter = withRouter(Navigation);
+const SUGGESTIONS = [
+  { label: "Bubble Sort", value: 0, sortingAlgorithem: sortService.bubbleSort },
+  { label: "Bogo Sort", value: 1, sortingAlgorithem: sortService.bubbleSort },
+];
 
 /**
  * @render react
@@ -56,29 +57,21 @@ class App extends Component {
     const isSortingButtonDisabled = typeof(value) !== 'number' || isSorting;
 
     return (
-      <ThemeProvider>
-        <AppContainer>
-          <Header>
-            <NavigationWithRouter />
-          </Header>
-          <MainContent>
-            <AutoSuggestInput 
-              value={value}
-              suggestions={[
-                { label: "Bubble Sort", value: 0, sortingAlgorithem: sortService.bubbleSort },
-                { label: "Bogo Sort", value: 1, sortingAlgorithem: sortService.bubbleSort },
-              ]}
-              placeholder="Please select sorting algorithem"
-              onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
-            />
-            <SortVisualizer numbers={numbers}/>
-            <Button onClick={() => this.handleSort()}
-                    disabled={isSortingButtonDisabled}> 
-              Sort 
-            </Button>
-          </MainContent>
-        </AppContainer>
-      </ThemeProvider>
+      <AppContainer>
+        <MainContent>
+          <AutoSuggestInput 
+            value={value}
+            suggestions={SUGGESTIONS}
+            placeholder="Please select sorting algorithem"
+            onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
+          />
+          <SortVisualizer numbers={numbers}/>
+          <Button onClick={() => this.handleSort()}
+                  disabled={isSortingButtonDisabled}> 
+            Sort 
+          </Button>
+        </MainContent>
+      </AppContainer>
     );
   }
 }

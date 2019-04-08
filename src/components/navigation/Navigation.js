@@ -54,10 +54,7 @@ class Navigation extends Component {
 
   static defaultProps = {
     links: [
-      { label: 'Home', href: '/home', isActive: true },
-      { label: 'Browse', href: 'http://browse.to.somewhere' },
-      { label: 'My List', href: '/my-list' },
-      { label: 'Top Picks', href: '/top' },
+      { label: 'Sort Visualizer', href: '/sort', isActive: true },
     ]
   }
 

@@ -30,7 +30,9 @@ export const Header = styled.header`
 `;
 
 export const MainContent = styled.div`
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 `;

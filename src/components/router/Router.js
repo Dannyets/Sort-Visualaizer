@@ -20,13 +20,16 @@ import { BrowserRouter ,Route, Switch } from "react-router-dom";
  * },
  * ]}/>
  */
-const Router = ({ routes }) => (
+const Router = ({ routes, children }) => (
     <BrowserRouter>
-        <Switch>
-            {routes.map(({ exact, url, component }, index) => (
-                <Route key={index} exact={exact} path={url ? url : ''} component={component}/>
-            ))}
-        </Switch>
+        <div style={{ width: '100%', height: '100%' }}>
+            {children}
+            <Switch>
+                {routes.map(({ exact, url, component }, index) => (
+                    <Route key={index} exact={exact} path={url ? url : ''} component={component}/>
+                ))}
+            </Switch>
+        </div>
     </BrowserRouter>
 );
 
