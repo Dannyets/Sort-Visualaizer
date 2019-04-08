@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter ,Route, Switch } from "react-router-dom";
 
+import { RouterContainer } from './Router.styles';
+
 /**
  * @render react
  * @name Router
@@ -22,14 +24,14 @@ import { BrowserRouter ,Route, Switch } from "react-router-dom";
  */
 const Router = ({ routes, children }) => (
     <BrowserRouter>
-        <div style={{ width: '100%', height: '100%' }}>
+        <RouterContainer>
             {children}
             <Switch>
                 {routes.map(({ exact, url, component }, index) => (
                     <Route key={index} exact={exact} path={url ? url : ''} component={component}/>
                 ))}
             </Switch>
-        </div>
+        </RouterContainer>
     </BrowserRouter>
 );
 

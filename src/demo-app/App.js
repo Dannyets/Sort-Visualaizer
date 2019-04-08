@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import { AppContainer, MainContent, ConfigurationsTitle } from './App.styles.js';
+import { AppContainer, MainContent, ConfigurationsTitle, ConfigurationsContainer } from './App.styles.js';
 
 import { AutoSuggestInput, SortVisualizer, Input, Icon } from '../components';
 import { Button } from '@material-ui/core';
@@ -79,12 +79,14 @@ class App extends Component {
 
   render() {
     const { value, isSorting, numbers, delay, numberOfElements } = this.state;
-    const isSortingButtonDisabled = typeof(value) !== 'number' || isSorting;
+    const isSortingButtonDisabled = typeof(value) !== 'number' || 
+                                isSorting || 
+                                !numberOfElements;
 
     return (
       <AppContainer>
         <MainContent>
-          <div>
+          <ConfigurationsContainer>
             <ConfigurationsTitle>Configurations</ConfigurationsTitle>
             <AutoSuggestInput 
               value={value}
@@ -93,20 +95,22 @@ class App extends Component {
               onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
             />
             <Input value={delay}
-                  type="number"
-                  placeholder="Enter delay miliseconds"
-                  onChange={this.handleDelayChanged}/>
+                   type="number"
+                   placeholder="Enter delay miliseconds"
+                   onChange={this.handleDelayChanged}/>
             <Input value={numberOfElements}
-                  type="number"
-                  placeholder="Enter number of elements in array"
-                  onChange={this.handleNumberOfElementsChanged}/>
-            <Icon iconName="Refresh" 
-                  onClick={this.handleRefreshNumbers}
-                  title="Refresh numbers"
-                  tooltipPlacement="right"/>
-          </div>
+                   type="number"
+                   placeholder="Enter number of elements in array"
+                   onChange={this.handleNumberOfElementsChanged}/>
+            <Button onClick={this.handleRefreshNumbers}
+                    disabled={!numberOfElements}
+                    color="inheirt"
+                    variant="contained">
+                    Generate Random Numbers
+            </Button> 
+          </ConfigurationsContainer>
           <SortVisualizer numbers={numbers}/>
-          <Button onClick={() => this.handleSort()}
+          <Button onClick={this.handleSort}
                   disabled={isSortingButtonDisabled}
                   color="primary"
                   variant="contained"> 
