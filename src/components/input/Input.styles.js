@@ -19,7 +19,7 @@ export const InputContainer = styled.div`
 `;
 
 export const StyledInput = styled.input`
-    width: 90%;
+    width: 100%;
     background: transparent;
     border: 0;
     padding: 20px;

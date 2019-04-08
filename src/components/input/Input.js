@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Cancel as CancelIcon } from '@material-ui/icons';
-import { IconButton, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { InputContainer, StyledInput, styles } from './Input.styles';
 
 /**
@@ -43,18 +42,8 @@ class Input extends Component{
         onChange(value);
     }
 
-    clearSelection = () => {
-        const { onChange } = this.props;
-
-        const value = undefined;
-
-        this.setState({ value });
-
-        onChange();
-    }
-
     render(){
-        const { type, placeholder, onFocus, onBlur, classes } = this.props;
+        const { type, placeholder, onFocus, onBlur } = this.props;
         const { value } = this.state;
 
         return (
@@ -66,9 +55,6 @@ class Input extends Component{
                              onFocus={onFocus}
                              onBlur={onBlur}
                 />
-                <IconButton className={classes.cancelButton} onClick={() => this.clearSelection()}>
-                    <CancelIcon/>
-                </IconButton>
             </InputContainer>
         );
     }

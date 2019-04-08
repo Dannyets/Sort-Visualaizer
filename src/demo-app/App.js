@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import { AppContainer, MainContent } from './App.styles.js';
+import { AppContainer, MainContent, ConfigurationsTitle } from './App.styles.js';
 
-import { AutoSuggestInput, SortVisualizer } from '../components';
+import { AutoSuggestInput, SortVisualizer, Input } from '../components';
 import { Button } from '@material-ui/core';
 
 import { sortService } from '../services';
@@ -27,10 +27,10 @@ class App extends Component {
     sortingAlgorithem: sortService.bubbleSort,
     isSorting: false,
     value: null,
-    delay: 500
+    delay: null
   };
 
-  async onNumberPositionChange(upatedNumbers){
+  onNumberPositionChange = async (upatedNumbers) => {
     const { delay } = this.state;
 
     await generalUtils.delay(delay);
@@ -38,7 +38,7 @@ class App extends Component {
     this.setState({ numbers: upatedNumbers });
   }
 
-  async handleSort(){
+  handleSort = async () => {
     const { numbers, sortingAlgorithem } = this.state;
 
     this.setState({ isSorting: true });
@@ -48,26 +48,39 @@ class App extends Component {
     this.setState({ isSorting: false });
   }
 
-  handleSortingAlgorithemChange(value, sortingAlgorithem){
+  handleSortingAlgorithemChange = (value, sortingAlgorithem) => {
     this.setState({ value, sortingAlgorithem });
   }
 
+  handleDelayChanged = (delay) => {
+    this.setState({ delay });
+  }
+
   render() {
-    const { value, isSorting, numbers } = this.state;
+    const { value, isSorting, numbers, delay } = this.state;
     const isSortingButtonDisabled = typeof(value) !== 'number' || isSorting;
 
     return (
       <AppContainer>
         <MainContent>
-          <AutoSuggestInput 
-            value={value}
-            suggestions={SUGGESTIONS}
-            placeholder="Please select sorting algorithem"
-            onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
-          />
+          <div>
+            <ConfigurationsTitle>Configurations</ConfigurationsTitle>
+            <AutoSuggestInput 
+              value={value}
+              suggestions={SUGGESTIONS}
+              placeholder="Please select sorting algorithem"
+              onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
+            />
+            <Input value={delay}
+                  type="number"
+                  placeholder="Enter delay miliseconds"
+                  onChange={this.handleDelayChanged}/>
+          </div>
           <SortVisualizer numbers={numbers}/>
           <Button onClick={() => this.handleSort()}
-                  disabled={isSortingButtonDisabled}> 
+                  disabled={isSortingButtonDisabled}
+                  color="primary"
+                  variant="contained"> 
             Sort 
           </Button>
         </MainContent>

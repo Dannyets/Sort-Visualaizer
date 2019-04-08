@@ -15,11 +15,11 @@ class NumberVisualizer extends Component {
 
         return (
             <NumberVisualizerContainer>
-                <PositiveVisualNumberContainer>
+                <PositiveVisualNumberContainer className={'animate'}>
                     {number >= 0 && <NumberTitle>{number}</NumberTitle>}
                     <PositiveVisualNumber number={number}/>
                 </PositiveVisualNumberContainer>
-                <NegativeVisualNumberContainer>
+                <NegativeVisualNumberContainer className={'animate'}>
                     <NegativeVisualNumber number={number}/>
                     {number < 0 && <NumberTitle>{number}</NumberTitle>}
                 </NegativeVisualNumberContainer>

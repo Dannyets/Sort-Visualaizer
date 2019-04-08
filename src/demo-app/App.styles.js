@@ -36,3 +36,7 @@ export const MainContent = styled.div`
     flex-direction: column;
     justify-content: space-around;
 `;
+
+export const ConfigurationsTitle = styled.h1`
+    margin-bottom: 5px;
+`;
