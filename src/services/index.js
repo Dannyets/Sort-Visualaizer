@@ -1,0 +1,1 @@
+export { default as sortService } from './sort.service';
