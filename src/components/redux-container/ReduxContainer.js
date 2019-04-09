@@ -1,5 +1,6 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const mapStateToProps = (config) => (state, ownProps) => {
     const { selectors: configSelectors,
@@ -48,7 +49,7 @@ const mapDispatchToProps = (config) => (dispatch) => {
  *  }
  * }, connect)(OtherComponent);
  */
-const ReduxContainer = (config, connect) => {
+const ReduxContainer = (config) => {
   return (Component) =>  {
     class HighOrderComponent extends React.Component {
       render () {

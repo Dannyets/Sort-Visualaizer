@@ -3,7 +3,23 @@ import React, { Component } from 'react';
 import './App.css';
 import { AppContainer, MainContent, ConfigurationsTitle, ConfigurationsContainer } from './App.styles.js';
 
-import { AutoSuggestInput, SortVisualizer, Input, Icon } from '../components';
+import { 
+  getDelay,
+  getIsSorting,
+  getNumberOfElements,
+  getSortingAlgorithem,
+  getNumbers,
+  getValue
+} from './App.selectors';
+
+import { 
+  updateDelay, 
+  updateIsSorting, 
+  updateNumberOfElements, 
+  updateNumbers, 
+  updateSortingAlgorithem } from './App.actions';
+
+import { AutoSuggestInput, SortVisualizer, Input, ReduxContainer } from '../components';
 import { Button } from '@material-ui/core';
 
 import { sortService } from '../services';
@@ -22,25 +38,18 @@ const SUGGESTIONS = [
  * <App />
  */
 class App extends Component {
-  state = {
-    numbers: generalUtils.getRandomNumbers(20),
-    sortingAlgorithem: sortService.bubbleSort,
-    isSorting: false,
-    value: null,
-    delay: null,
-    numberOfElements: null
-  };
-
-  onNumberPositionChange = async (upatedNumbers) => {
-    const { delay } = this.state;
+    onNumberPositionChange = async (upatedNumbers) => {
+    const { delay, actions } = this.props;
+    const { updateNumbers } = actions;
 
     await generalUtils.delay(delay);
 
-    this.setState({ numbers: upatedNumbers });
+    updateNumbers(upatedNumbers);
   }
 
   handleSort = async () => {
-    const { sortingAlgorithem, numbers } = this.state;
+    const { sortingAlgorithem, numbers, actions } = this.props;
+    const { updateIsSorting } = actions;
 
     let currentNumbers = numbers;
 
@@ -48,37 +57,30 @@ class App extends Component {
       currentNumbers = this.handleRefreshNumbers();
     }
 
-    this.setState({ isSorting: true });
+    updateIsSorting(true);
 
-    await sortingAlgorithem(currentNumbers, this.onNumberPositionChange.bind(this));
+    await sortingAlgorithem([...currentNumbers], this.onNumberPositionChange.bind(this));
 
-    this.setState({ isSorting: false });
-  }
-
-  handleSortingAlgorithemChange = (value, sortingAlgorithem) => {
-    this.setState({ value, sortingAlgorithem });
-  }
-
-  handleDelayChanged = (delay) => {
-    this.setState({ delay });
-  }
-
-  handleNumberOfElementsChanged = (numberOfElements) => {
-    this.setState({ numberOfElements });
+    updateIsSorting(false);
   }
 
   handleRefreshNumbers = () => {
-    const { numberOfElements } = this.state;
+    const { numberOfElements, actions } = this.props;
+    const { updateNumbers } = actions;
   
-    let numbers = generalUtils.getRandomNumbers(numberOfElements);
+    const numbers = generalUtils.getRandomNumbers(numberOfElements);
 
-    this.setState({ numbers });
+    updateNumbers(numbers);
 
     return numbers;
   }
 
   render() {
-    const { value, isSorting, numbers, delay, numberOfElements } = this.state;
+    const { value, isSorting, numbers, delay, numberOfElements, actions } = this.props;
+    const { updateDelay, 
+            updateNumberOfElements, 
+            updateSortingAlgorithem } = actions;
+
     const isSortingButtonDisabled = typeof(value) !== 'number' || 
                                 isSorting || 
                                 !numberOfElements;
@@ -92,16 +94,16 @@ class App extends Component {
               value={value}
               suggestions={SUGGESTIONS}
               placeholder="Please select sorting algorithem"
-              onChange={(value, suggestion) => this.handleSortingAlgorithemChange(value, suggestion.sortingAlgorithem)}
+              onChange={(value, suggestion) => updateSortingAlgorithem(value, suggestion.sortingAlgorithem)}
             />
             <Input value={delay}
                    type="number"
                    placeholder="Enter delay miliseconds"
-                   onChange={this.handleDelayChanged}/>
+                   onChange={(delay) => updateDelay(delay)}/>
             <Input value={numberOfElements}
                    type="number"
                    placeholder="Enter number of elements in array"
-                   onChange={this.handleNumberOfElementsChanged}/>
+                   onChange={(numberOfElements) => updateNumberOfElements(numberOfElements)}/>
             <Button onClick={this.handleRefreshNumbers}
                     disabled={!numberOfElements}
                     color="inheirt"
@@ -122,5 +124,21 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ReduxContainer({
+  selectors: {
+    numbers: getNumbers,
+    isSorting: getIsSorting,
+    delay: getDelay,
+    sortingAlgorithem: getSortingAlgorithem,
+    value: getValue,
+    numberOfElements: getNumberOfElements
+  },
+  actions: {
+    updateDelay, 
+    updateIsSorting, 
+    updateNumberOfElements, 
+    updateNumbers, 
+    updateSortingAlgorithem
+  }
+})(App);
 

@@ -1,4 +1,4 @@
-import './demo-app/Root';
+import Root from './root';
 import * as components from './components';
 import * as utils from './utils';
 
