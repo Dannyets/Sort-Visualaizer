@@ -123,13 +123,13 @@ class AutoSuggestInput extends Component{
     }
 
     render(){
-        const { type, placeholder, loadSuggestions, classes } = this.props;
+        const { type, placeholder, loadSuggestions, classes, className } = this.props;
         const { value, showSuggestionsMenu } = this.state;
         const { label } = value || {};
         const suggestions = this.getFilteredSuggestions();
 
         return (
-            <InputWrapper>
+            <InputWrapper className={className}>
                 <InputRow>
                     <Input placeholder={placeholder}
                                         type={type}

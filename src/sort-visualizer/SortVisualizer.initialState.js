@@ -7,7 +7,7 @@ export default {
     numbers: generalUtils.getRandomNumbers(20),
     value: null,
     delay: null,
-    numberOfElements: null,
+    numberOfElements: 20,
     suggestions: [
         { label: "Bubble Sort", value: 0, sortingAlgorithem: sortService.bubbleSort },
     ]

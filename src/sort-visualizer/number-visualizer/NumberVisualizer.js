@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { 
@@ -7,26 +7,21 @@ import {
     NegativeVisualNumber, 
     PositiveVisualNumberContainer, 
     NegativeVisualNumberContainer,
-    NumberTitle } from './NumberVisualizer.styles';
+    NumberTitle 
+} from './NumberVisualizer.styles';
 
-class NumberVisualizer extends Component {
-    render(){
-        const { number } = this.props;
-
-        return (
-            <NumberVisualizerContainer>
-                <PositiveVisualNumberContainer className={'animate'}>
-                    {number >= 0 && <NumberTitle>{number}</NumberTitle>}
-                    <PositiveVisualNumber number={number}/>
-                </PositiveVisualNumberContainer>
-                <NegativeVisualNumberContainer className={'animate'}>
-                    <NegativeVisualNumber number={number}/>
-                    {number < 0 && <NumberTitle>{number}</NumberTitle>}
-                </NegativeVisualNumberContainer>
-            </NumberVisualizerContainer>
-        );
-    }
-}
+const NumberVisualizer = ({ number }) => (
+    <NumberVisualizerContainer>
+        <PositiveVisualNumberContainer>
+            {number >= 0 && <NumberTitle>{number}</NumberTitle>}
+            <PositiveVisualNumber number={number}/>
+        </PositiveVisualNumberContainer>
+        <NegativeVisualNumberContainer>
+            <NegativeVisualNumber number={number}/>
+            {number < 0 && <NumberTitle>{number}</NumberTitle>}
+        </NegativeVisualNumberContainer>
+    </NumberVisualizerContainer>
+);
 
 NumberVisualizer.propTypes = {
     number: PropTypes.number

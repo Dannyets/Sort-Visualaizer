@@ -21,8 +21,13 @@ export const ConfigurationsContainer = styled.div`
     flex-direction: column;
 `;
 
-export const ConfigurationsTitle = styled.h1`
-    margin-bottom: 5px;
-    width: 100%;
-    text-align: center;
+export const ConfigurationSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const ConfigurationSectionTitle = styled.span`
+    width: 50%;
 `;

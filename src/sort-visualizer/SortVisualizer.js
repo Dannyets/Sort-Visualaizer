@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
-import { AppContainer, MainContent, ConfigurationsTitle, ConfigurationsContainer } from './SortVisualizer.styles.js';
+import './SortVisualizer.css';
+
+
+import { 
+  AppContainer, 
+  MainContent, 
+  ConfigurationSection, 
+  ConfigurationSectionTitle,
+  ConfigurationsContainer } from './SortVisualizer.styles.js';
 
 import { 
   getDelay,
@@ -84,35 +92,50 @@ class SortVisualizer extends Component {
       <AppContainer>
         <MainContent>
           <ConfigurationsContainer>
-            <ConfigurationsTitle>Configurations</ConfigurationsTitle>
-            <AutoSuggestInput 
-              value={value}
-              suggestions={suggestions}
-              placeholder="Please select sorting algorithem"
-              onChange={(value, suggestion) => updateSortingAlgorithem(value, suggestion.sortingAlgorithem)}
-            />
-            <Input value={delay}
-                   type="number"
-                   placeholder="Enter delay miliseconds"
-                   onChange={(delay) => updateDelay(delay)}/>
-            <Input value={numberOfElements}
-                   type="number"
-                   placeholder="Enter number of elements in array"
-                   onChange={(numberOfElements) => updateNumberOfElements(numberOfElements)}/>
-            <Button onClick={this.handleRefreshNumbers}
-                    disabled={!numberOfElements}
-                    color="inheirt"
-                    variant="contained">
-                    Generate Random Numbers
-            </Button> 
+            <ConfigurationSection>
+              <span className="width-half">Sorting Algorithem</span>
+              <AutoSuggestInput 
+                value={value}
+                suggestions={suggestions}
+                placeholder="Please select sorting algorithem"
+                className="width-half"
+                onChange={(value, suggestion) => updateSortingAlgorithem(value, suggestion.sortingAlgorithem)}
+              />
+            </ConfigurationSection>
+            <ConfigurationSection>
+              <span className="width-half">Delay</span>
+              <Input value={delay}
+                    type="number"
+                    placeholder="Enter delay miliseconds"
+                    className="width-half"
+                    onChange={(delay) => updateDelay(delay)}/>
+            </ConfigurationSection>
+            <ConfigurationSection>
+              <span className="width-half">Number Of Elements</span>
+              <Input value={numberOfElements}
+                    type="number"
+                    className="width-half"
+                    placeholder="Enter number of elements in array"
+                    onChange={(numberOfElements) => updateNumberOfElements(numberOfElements)}/>
+            </ConfigurationSection>
           </ConfigurationsContainer>
           <NumbersVisualizer numbers={numbers}/>
-          <Button onClick={this.handleSort}
-                  disabled={isSortingButtonDisabled}
-                  color="primary"
-                  variant="contained"> 
-            Sort 
-          </Button>
+          <ConfigurationSection>
+            <Button onClick={this.handleRefreshNumbers}
+                      disabled={!numberOfElements || isSorting}
+                      className="button width-half"
+                      color="inheirt"
+                      variant="contained">
+                      Generate Random Numbers
+            </Button> 
+            <Button onClick={this.handleSort}
+                    disabled={isSortingButtonDisabled}
+                    className="button width-half"
+                    color="primary"
+                    variant="contained"> 
+              Sort 
+            </Button>
+          </ConfigurationSection>
         </MainContent>
       </AppContainer>
     );

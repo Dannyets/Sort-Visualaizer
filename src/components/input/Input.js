@@ -43,11 +43,11 @@ class Input extends Component{
     }
 
     render(){
-        const { type, placeholder, onFocus, onBlur } = this.props;
+        const { type, placeholder, onFocus, onBlur, className } = this.props;
         const { value } = this.state;
 
         return (
-            <InputContainer>
+            <InputContainer className={className}>
                 <StyledInput placeholder={placeholder}
                              type={type ? type : 'text'}
                              value={value}
