@@ -7,8 +7,8 @@ import {
   AppContainer, 
   MainContent, 
   ConfigurationSection, 
-  ConfigurationSectionTitle,
-  ConfigurationsContainer } from './SortVisualizer.styles.js';
+  ConfigurationsContainer,
+  ExplosionContainer } from './SortVisualizer.styles.js';
 
 import { 
   getDelay,
@@ -30,6 +30,7 @@ import {
 import { AutoSuggestInput, Input, ReduxContainer } from '../components';
 import NumbersVisualizer from './numbers-visualizer';
 import { Button } from '@material-ui/core';
+import Explosion from "react-explode/Explosion9";
 
 import { general as generalUtils } from '../utils';
 
@@ -41,7 +42,11 @@ import { general as generalUtils } from '../utils';
  * <App />
  */
 class SortVisualizer extends Component {
-    onNumberPositionChange = async (upatedNumbers) => {
+  state = {
+    showExplosion: false
+  }
+
+  onNumberPositionChange = async (upatedNumbers) => {
     const { delay, actions } = this.props;
     const { updateNumbers } = actions;
 
@@ -65,6 +70,8 @@ class SortVisualizer extends Component {
     await sortingAlgorithem([...currentNumbers], this.onNumberPositionChange.bind(this));
 
     updateIsSorting(false);
+
+    this.setState({ showExplosion: true });
   }
 
   handleRefreshNumbers = () => {
@@ -78,8 +85,23 @@ class SortVisualizer extends Component {
     return numbers;
   }
 
+  getExplosionSize(){
+    let explostionSize = 800;
+    const deviceWidth = window.outerWidth;
+
+    if(deviceWidth < 700){
+      explostionSize = 600;
+    }
+    else if(deviceWidth < 800){
+        explostionSize = 700
+    }
+
+    return explostionSize;
+  }
+
   render() {
     const { value, isSorting, numbers, delay, numberOfElements, suggestions, actions } = this.props;
+    const { showExplosion } = this.state;
     const { updateDelay, 
             updateNumberOfElements, 
             updateSortingAlgorithem } = actions;
@@ -87,6 +109,8 @@ class SortVisualizer extends Component {
     const isSortingButtonDisabled = typeof(value) !== 'number' || 
                                 isSorting || 
                                 !numberOfElements;
+
+    const explosionSize = this.getExplosionSize();
 
     return (
       <AppContainer>
@@ -135,6 +159,14 @@ class SortVisualizer extends Component {
                     variant="contained"> 
               Sort 
             </Button>
+            {showExplosion && 
+            <ExplosionContainer>
+              <Explosion size={explosionSize} 
+                         delay={0} 
+                         repeatDelay={0} 
+                         repeat={0} 
+                         onComplete={() => this.setState({ showExplosion: false })}/>
+            </ExplosionContainer>}
           </ConfigurationSection>
         </MainContent>
       </AppContainer>
