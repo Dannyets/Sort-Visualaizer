@@ -111,11 +111,11 @@ class SortVisualizer extends Component {
                     onChange={(delay) => updateDelay(delay)}/>
             </ConfigurationSection>
             <ConfigurationSection>
-              <span className="width-half">Number Of Elements</span>
+              <span className="width-half">Number Of Random Elements</span>
               <Input value={numberOfElements}
                     type="number"
                     className="width-half"
-                    placeholder="Enter number of elements in array"
+                    placeholder="Enter number of random elements to generate"
                     onChange={(numberOfElements) => updateNumberOfElements(numberOfElements)}/>
             </ConfigurationSection>
           </ConfigurationsContainer>
