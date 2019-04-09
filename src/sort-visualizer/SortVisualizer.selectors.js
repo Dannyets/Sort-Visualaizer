@@ -5,3 +5,4 @@ export const getIsSorting = (state) => getSortVisualizer(state).isSorting;
 export const getNumberOfElements = (state) => getSortVisualizer(state).numberOfElements;
 export const getValue = (state) => getSortVisualizer(state).value;
 export const getSortingAlgorithem = (state) => getSortVisualizer(state).sortingAlgorithem;
+export const getSuggestions = (state) => getSortVisualizer(state).suggestions;

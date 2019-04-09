@@ -1,11 +1,11 @@
-import initialState from './App.initialState';
+import initialState from './SortVisualizer.initialState';
 import { 
     UPDATE_DELAY,
     UPDATE_IS_SORTING,
     UPDATE_NUMBERS,
     UPDATE_NUMBER_OF_ELEMENTS,
     UPDATE_SORTING_ALGORITHEM
- } from './App.actionTypes';
+ } from './SortVisualizer.actionTypes';
 
 function appReducer(state = initialState, action){
     const { type, payload } = action;

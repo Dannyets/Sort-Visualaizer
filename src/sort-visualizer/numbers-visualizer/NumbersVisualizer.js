@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NumberVisualizer from '../number-visualizer/NumberVisualizer';
-import { SortVisualizerContainer } from './SortVisualizer.styles';
+import NumberVisualizer from '../number-visualizer';
+import { NumbersVisualizerContainer } from './NumbersVisualizer.styles';
 
-class SortVisualizer extends Component {
+class NumbersVisualizer extends Component {
     
     render(){
         const { numbers } = this.props;
 
         return (
-            <SortVisualizerContainer>
+            <NumbersVisualizerContainer>
                 {numbers.map((number, index) => (<NumberVisualizer key={index} number={number}/>))}
-            </SortVisualizerContainer>
+            </NumbersVisualizerContainer>
         );
     }
 }
 
-SortVisualizer.propTypes = {
+NumbersVisualizer.propTypes = {
     numbers: PropTypes.arrayOf(PropTypes.number)
 };
 
-export default SortVisualizer;
+export default NumbersVisualizer;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import './App.css';
-import { AppContainer, MainContent, ConfigurationsTitle, ConfigurationsContainer } from './App.styles.js';
+import { AppContainer, MainContent, ConfigurationsTitle, ConfigurationsContainer } from './SortVisualizer.styles.js';
 
 import { 
   getDelay,
@@ -9,26 +8,22 @@ import {
   getNumberOfElements,
   getSortingAlgorithem,
   getNumbers,
-  getValue
-} from './App.selectors';
+  getValue,
+  getSuggestions
+} from './SortVisualizer.selectors';
 
 import { 
   updateDelay, 
   updateIsSorting, 
   updateNumberOfElements, 
   updateNumbers, 
-  updateSortingAlgorithem } from './App.actions';
+  updateSortingAlgorithem } from './SortVisualizer.actions';
 
-import { AutoSuggestInput, SortVisualizer, Input, ReduxContainer } from '../components';
+import { AutoSuggestInput, Input, ReduxContainer } from '../components';
+import NumbersVisualizer from './numbers-visualizer';
 import { Button } from '@material-ui/core';
 
-import { sortService } from '../services';
 import { general as generalUtils } from '../utils';
-
-const SUGGESTIONS = [
-  { label: "Bubble Sort", value: 0, sortingAlgorithem: sortService.bubbleSort },
-  { label: "Bogo Sort", value: 1, sortingAlgorithem: sortService.bubbleSort },
-];
 
 /**
  * @render react
@@ -37,7 +32,7 @@ const SUGGESTIONS = [
  * @example
  * <App />
  */
-class App extends Component {
+class SortVisualizer extends Component {
     onNumberPositionChange = async (upatedNumbers) => {
     const { delay, actions } = this.props;
     const { updateNumbers } = actions;
@@ -76,7 +71,7 @@ class App extends Component {
   }
 
   render() {
-    const { value, isSorting, numbers, delay, numberOfElements, actions } = this.props;
+    const { value, isSorting, numbers, delay, numberOfElements, suggestions, actions } = this.props;
     const { updateDelay, 
             updateNumberOfElements, 
             updateSortingAlgorithem } = actions;
@@ -92,7 +87,7 @@ class App extends Component {
             <ConfigurationsTitle>Configurations</ConfigurationsTitle>
             <AutoSuggestInput 
               value={value}
-              suggestions={SUGGESTIONS}
+              suggestions={suggestions}
               placeholder="Please select sorting algorithem"
               onChange={(value, suggestion) => updateSortingAlgorithem(value, suggestion.sortingAlgorithem)}
             />
@@ -111,7 +106,7 @@ class App extends Component {
                     Generate Random Numbers
             </Button> 
           </ConfigurationsContainer>
-          <SortVisualizer numbers={numbers}/>
+          <NumbersVisualizer numbers={numbers}/>
           <Button onClick={this.handleSort}
                   disabled={isSortingButtonDisabled}
                   color="primary"
@@ -131,7 +126,8 @@ export default ReduxContainer({
     delay: getDelay,
     sortingAlgorithem: getSortingAlgorithem,
     value: getValue,
-    numberOfElements: getNumberOfElements
+    numberOfElements: getNumberOfElements,
+    suggestions: getSuggestions
   },
   actions: {
     updateDelay, 
@@ -140,5 +136,5 @@ export default ReduxContainer({
     updateNumbers, 
     updateSortingAlgorithem
   }
-})(App);
+})(SortVisualizer);
 

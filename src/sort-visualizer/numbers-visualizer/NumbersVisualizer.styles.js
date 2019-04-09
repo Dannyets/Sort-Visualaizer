@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SortVisualizerContainer = styled.div`
+export const NumbersVisualizerContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

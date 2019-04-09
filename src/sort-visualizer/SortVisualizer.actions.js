@@ -4,7 +4,7 @@ import {
     UPDATE_NUMBERS,
     UPDATE_NUMBER_OF_ELEMENTS,
     UPDATE_SORTING_ALGORITHEM
- } from './App.actionTypes';
+ } from './SortVisualizer.actionTypes';
 
 export const updateDelay = (delay) => ({
      type: UPDATE_DELAY,

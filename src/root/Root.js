@@ -6,9 +6,13 @@ import { Provider } from 'react-redux';
 import { configureStore, initialState } from '../store';
 import routes from './routes';
 
+import './Root.css';
 import { Header } from './Root.styles';
 
-import { Router, ThemeProvider, Navigation } from '../components';
+import Router from './router';
+import ThemeProvider from './theme-provider';
+import Navigation from './navigation';
+
 const NavigationWithRouter = withRouter(Navigation);
 
 const store = configureStore(initialState);

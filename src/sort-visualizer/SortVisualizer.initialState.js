@@ -1,4 +1,5 @@
 import { general as generalUtils } from '../utils';
+import { sortService } from '../services';
 
 export default {
     sortingAlogrithem: null,
@@ -6,5 +7,8 @@ export default {
     numbers: generalUtils.getRandomNumbers(20),
     value: null,
     delay: null,
-    numberOfElements: null
+    numberOfElements: null,
+    suggestions: [
+        { label: "Bubble Sort", value: 0, sortingAlgorithem: sortService.bubbleSort },
+    ]
 };

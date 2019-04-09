@@ -1,9 +1,9 @@
-import App from '../demo-app/App';
+import { SortVisualizer } from '../sort-visualizer';
 
 export default [
     {
         url: '/',
-        component: App,
+        component: SortVisualizer,
         exact: true
     }
 ];

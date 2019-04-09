@@ -1,5 +1,5 @@
-import { appInitialState as sortVisualizer } from '../demo-app';
+import { sortVisualizerInitialState } from '../sort-visualizer';
 
 export default {
-    sortVisualizer
+    sortVisualizer: sortVisualizerInitialState
 }

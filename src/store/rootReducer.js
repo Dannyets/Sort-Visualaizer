@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { appReducer as sortVisualizerReducer } from '../demo-app';
+import { sortVisualizerReducer } from '../sort-visualizer';
 
 const rootReducer = combineReducers({
   sortVisualizer: sortVisualizerReducer
