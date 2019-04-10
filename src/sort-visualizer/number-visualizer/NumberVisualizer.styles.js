@@ -12,14 +12,13 @@ export const NumberVisualizerContainer = styled.div`
 
 export const VisualNumberContainer = styled.div`
     height: 50%;
-    width: 90%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 export const PositiveVisualNumberContainer = styled(VisualNumberContainer)`
     justify-content: flex-end;
-    transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
 
 
@@ -41,7 +40,6 @@ export const NegativeVisualNumber = styled(VisualNumber)`
 `;
 
 export const NumberTitle = styled.div`
-    width: 33%;
     text-align: center;
     margin: 5px 0;
 `;

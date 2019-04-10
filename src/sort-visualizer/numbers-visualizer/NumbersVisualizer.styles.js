@@ -6,5 +6,5 @@ export const NumbersVisualizerContainer = styled.div`
     justify-content: end;
     align-items: flex-end;
     height: 500px;
-    overflow: -webkit-paged-x;
+    overflow: auto;
 `;
