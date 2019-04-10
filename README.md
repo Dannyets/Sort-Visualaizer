@@ -1,6 +1,11 @@
 # Sort Algorithems Visualizer
 Here you can watch visualization of some of the sorting algorithems
 
+# Technologies
+ - React
+ - Redux
+ - Webpack
+ 
 # How to Setup
 1. First, you need to clone this repository, use:
 ```
@@ -17,7 +22,19 @@ cd Sort-Visualizer
 npm install
 ```
 
-4. Run the script to use:
+# How to Execute
+1. After running npm install, run the script:
 ```
 npm start
 ```
+
+OR
+
+2. Alternative way is to run the index.html file :
+```
+cd dist
+double-click on html.index file
+```
+
+# Resources
+ - Material - UI - https://material-ui.com/
