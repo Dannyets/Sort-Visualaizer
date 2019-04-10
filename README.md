@@ -30,11 +30,11 @@ npm start
 
 OR
 
-2. Alternative way is to run the index.html file :
+2. Alternative way is to:
 ```
 cd dist
-double-click on index.html file
 ```
+Double-click on index.html file and open it with the browser.
 
 # Resources
  - Material - UI - https://material-ui.com/
