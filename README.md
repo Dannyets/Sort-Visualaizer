@@ -33,7 +33,7 @@ OR
 2. Alternative way is to run the index.html file :
 ```
 cd dist
-double-click on html.index file
+double-click on index.html file
 ```
 
 # Resources
