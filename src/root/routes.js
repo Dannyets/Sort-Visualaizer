@@ -4,6 +4,6 @@ export default [
     {
         url: '/',
         component: SortVisualizer,
-        exact: true
+        exact: false
     }
 ];

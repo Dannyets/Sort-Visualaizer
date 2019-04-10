@@ -5,14 +5,13 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpackCommonConfig from './webpack.config.common';
-import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
   __DEV__: false
 };
 
-const { resolve, target, entry, module, plugins: commonPlugins, node } = webpackCommonConfig;
+const { resolve, target, entry, output, module, plugins: commonPlugins, node } = webpackCommonConfig;
 
 export default {
   resolve,
@@ -20,11 +19,7 @@ export default {
   target,
   node,
   mode: 'production',
-  output: {
-    path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: './',
-    filename: 'bundle.js'
-  },
+  output,
   plugins: [
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),

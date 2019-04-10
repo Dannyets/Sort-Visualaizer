@@ -14,7 +14,3 @@ build
 .env
 npm-debug.log
 .vscode
-
-# Bit   
-.bit
-dist/
